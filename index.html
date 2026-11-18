@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Göktuğ Oğuz Güngör</title>
+<meta name="description" content="Platform Engineer, AI Infrastructure. Kubernetes and OpenShift at large scale, and open-source work on the projects that serve LLMs on Kubernetes.">
+<meta property="og:title" content="Göktuğ Oğuz Güngör">
+<meta property="og:description" content="Platform Engineer, AI Infrastructure. LLM inference every team can share.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://goguzgungor.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232350d2'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;800;900&family=Red+Hat+Mono:wght@400;500&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --band: #2350d2;
+  --band-ink: #ffffff;
+  --band-soft: #d3ddff;
+  --page: #ffffff;
+  --card: #ffffff;
+  --ink: #0f1b3d;
+  --muted: #56617c;
+  --line: #dce2ee;
+  --link: #2350d2;
+  --run: #17804a;
+  --run-bg: #e3f4ea;
+  --pend: #9a610c;
+  --pend-bg: #fbf0d9;
+  --lift: 0 24px 48px -24px rgba(20, 45, 130, 0.45);
+  --display: 'Red Hat Display', system-ui, sans-serif;
+  --body: 'Red Hat Text', system-ui, sans-serif;
+  --mono: 'Red Hat Mono', ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --band: #1b3a9c;
+    --band-soft: #c3d0ff;
+    --page: #0c1222;
+    --card: #131b30;
+    --ink: #e9edf7;
+    --muted: #9aa6c0;
+    --line: #26314e;
+    --link: #93b1ff;
+    --run: #5fd391;
+    --run-bg: #10301f;
+    --pend: #e6ae52;
+    --pend-bg: #33270f;
+    --lift: 0 24px 48px -24px rgba(0, 0, 0, 0.7);
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--page); color: var(--ink);
+  font-family: var(--body); font-size: 17px; line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 4px; }
+p { margin: 0; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* band: the one loud surface on the page */
+.band { background: var(--band); color: var(--band-ink); padding-bottom: 150px; }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
+.mark { font-family: var(--mono); font-size: 14px; color: var(--band-soft); white-space: nowrap; }
+.bar nav { display: flex; gap: 4px; align-items: center; }
+.bar nav a { font-size: 15px; font-weight: 500; color: var(--band-ink); padding: 6px 10px; border-radius: 6px; }
+.bar nav a:hover { background: rgba(255, 255, 255, 0.14); text-decoration: none; }
+.bar nav a.pdf { background: var(--band-ink); color: var(--band); font-weight: 600; margin-left: 6px; white-space: nowrap; }
+.bar nav a.pdf:hover { background: var(--band-soft); }
+.band a:focus-visible { outline-color: var(--band-ink); }
+.role { font-size: 18px; font-weight: 500; color: var(--band-soft); margin: 56px 0 14px; }
+h1 {
+  font-family: var(--display); font-weight: 900;
+  font-size: clamp(46px, 10.5vw, 116px); line-height: 1; letter-spacing: -0.035em;
+  margin: 0;
+}
+h1 span { display: block; }
+
+/* thesis: a Kubernetes object. spec is what's wanted, status is what's running. */
+.thesis {
+  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  overflow: hidden; margin-top: -110px; box-shadow: var(--lift);
+}
+.thesis-head {
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  font-family: var(--mono); font-size: 13px; color: var(--muted);
+  padding: 11px 20px; border-bottom: 1px solid var(--line);
+}
+.phase { display: inline-flex; align-items: center; gap: 8px; }
+.phase-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--run); }
+.swap { display: inline-grid; }
+.swap > * { grid-area: 1 / 1; }
+.swap .was { opacity: 0; }
+.state { margin: 0; }
+.state > div { display: grid; grid-template-columns: 96px 1fr; align-items: baseline; padding: 16px 20px; }
+.state dt { font-family: var(--mono); font-size: 14px; color: var(--muted); }
+.state dd {
+  margin: 0; min-width: 0; overflow-wrap: anywhere;
+  font-family: var(--display); font-weight: 800;
+  font-size: clamp(21px, 3.5vw, 35px); line-height: 1.18; letter-spacing: -0.02em;
+}
+.state .status { background: var(--run-bg); color: var(--run); }
+.state .status dt { color: inherit; }
+.conditions { list-style: none; margin: 0; padding: 16px 20px 18px; border-top: 1px solid var(--line); display: grid; gap: 9px; }
+.conditions li { display: grid; grid-template-columns: 20px 112px 1fr; gap: 12px; align-items: center; }
+.conditions .tick {
+  width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center;
+  border: 2px solid var(--run); background: var(--run); color: var(--card);
+  font-size: 11px; font-weight: 700; line-height: 1;
+}
+.conditions .type { font-family: var(--mono); font-size: 14px; font-weight: 500; }
+.conditions .note { font-size: 15px; color: var(--muted); min-width: 0; }
+
+/* load sequence: conditions turn true one by one, then the object reports Running */
+.js .conditions .tick { background: transparent; border-color: var(--pend); color: transparent; animation: turn-true 0.3s ease forwards; }
+.js .conditions li:nth-child(1) .tick { animation-delay: 0.6s; }
+.js .conditions li:nth-child(2) .tick { animation-delay: 1.05s; }
+.js .conditions li:nth-child(3) .tick { animation-delay: 1.5s; }
+.js .conditions li:nth-child(4) .tick { animation-delay: 1.95s; }
+.js .swap .was { opacity: 1; animation: leave 0.3s ease 2.5s forwards; }
+.js .swap .now { opacity: 0; animation: arrive 0.3s ease 2.5s forwards; }
+.js .state .status { background: var(--pend-bg); color: var(--pend); animation: report-running 0.3s ease 2.5s forwards; }
+.js .phase-dot { background: var(--pend); animation: dot-running 0.3s ease 2.5s forwards; }
+@keyframes turn-true { to { background: var(--run); border-color: var(--run); color: var(--card); } }
+@keyframes leave { to { opacity: 0; } }
+@keyframes arrive { to { opacity: 1; } }
+@keyframes report-running { to { background: var(--run-bg); color: var(--run); } }
+@keyframes dot-running { to { background: var(--run); } }
+@media (prefers-reduced-motion: reduce) {
+  .js .conditions .tick, .js .swap .was, .js .swap .now, .js .state .status, .js .phase-dot {
+    animation-duration: 0s; animation-delay: 0s !important;
+  }
+}
+
+.lede { max-width: 680px; font-size: 20px; line-height: 1.55; color: var(--muted); margin-top: 36px; }
+.lede strong { color: var(--ink); font-weight: 500; }
+
+/* sections */
+.block { padding-top: 76px; }
+h2 { font-family: var(--display); font-weight: 800; font-size: clamp(27px, 4vw, 36px); letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 26px; }
+h3 { font-family: var(--display); font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; margin: 0; }
+.intro { max-width: 640px; color: var(--muted); margin: -12px 0 26px; }
+
+.focus { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.focus > * { min-width: 0; }
+.focus h3 { font-size: 21px; margin-bottom: 8px; }
+.focus p { color: var(--muted); font-size: 16px; }
+
+/* rows: experience, open source, projects share one ruled list */
+.rows { list-style: none; margin: 0; padding: 0; }
+.rows > li { display: grid; grid-template-columns: 170px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid var(--line); }
+.rows > li > * { min-width: 0; }
+.rows .side { font-size: 15px; color: var(--muted); padding-top: 4px; font-variant-numeric: tabular-nums; }
+.rows h3 { font-size: 22px; margin-bottom: 4px; }
+.rows h3 small { font-family: var(--body); font-size: 16px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.rows p { color: var(--muted); max-width: 660px; }
+.merged { display: inline-flex; align-items: center; gap: 7px; color: var(--run); font-weight: 500; }
+.merged::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--run); }
+
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 48px; border-top: 1px solid var(--line); padding-top: 26px; }
+.cols > * { min-width: 0; }
+.cols h3 { font-size: 20px; margin-bottom: 8px; }
+.cols p { color: var(--muted); }
+.cols p + h3 { margin-top: 28px; }
+.cols b { color: var(--ink); font-weight: 600; }
+
+footer { margin-top: 96px; border-top: 1px solid var(--line); }
+footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; padding-top: 24px; padding-bottom: 36px; font-size: 15px; color: var(--muted); }
+footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+
+@media screen and (max-width: 760px) {
+  .wrap { padding: 0 16px; }
+  .band { padding-bottom: 120px; }
+  .bar nav a.hide-sm, .mark .tld { display: none; }
+  .role { margin-top: 36px; font-size: 16px; }
+  .rows h3 small { display: block; margin-top: 2px; }
+  .thesis { margin-top: -88px; }
+  .thesis-head, .state > div { padding-left: 16px; padding-right: 16px; }
+  .state > div { grid-template-columns: 66px 1fr; }
+  .conditions { padding-left: 16px; padding-right: 16px; }
+  .conditions li { grid-template-columns: 20px 1fr; row-gap: 0; }
+  .conditions .note { grid-column: 2; font-size: 14px; }
+  .lede { font-size: 18px; }
+  .block { padding-top: 56px; }
+  .focus, .cols { grid-template-columns: 1fr; gap: 24px; }
+  .rows > li { grid-template-columns: 1fr; gap: 2px; padding: 18px 0; }
+  footer { margin-top: 64px; }
+}
+
+/* print / PDF: same content, quiet layout */
+@media print {
+  :root {
+    --band: #fff; --band-ink: #111; --band-soft: #4a4f5a;
+    --page: #fff; --card: #fff; --ink: #111; --muted: #4a4f5a; --line: #d9dde5;
+    --link: #111; --run: #17804a; --run-bg: #e3f4ea; --lift: none;
+  }
+  @page { size: A4; margin: 12mm 14mm; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-size: 10pt; line-height: 1.45; }
+  .wrap { padding: 0; max-width: none; }
+  .band { padding-bottom: 0; }
+  .bar { display: none; }
+  .role { margin: 0 0 4px; font-size: 11pt; }
+  h1 { font-size: 34pt; }
+  h1 span { display: inline; }
+  .thesis { margin-top: 14px; border-radius: 8px; }
+  .thesis-head { padding: 6px 12px; font-size: 8pt; }
+  .state > div { padding: 7px 12px; grid-template-columns: 60px 1fr; }
+  .state dt { font-size: 8.5pt; }
+  .state dd { font-size: 14pt; }
+  .conditions { padding: 9px 12px; gap: 4px; }
+  .conditions li { grid-template-columns: 14px 86px 1fr; gap: 8px; }
+  .conditions .tick { width: 13px; height: 13px; font-size: 7pt; border-width: 1px; }
+  .conditions .type, .conditions .note { font-size: 9pt; }
+  .js .conditions .tick { animation: none; background: var(--run); border-color: var(--run); color: #fff; }
+  .js .swap .was { animation: none; opacity: 0; }
+  .js .swap .now { animation: none; opacity: 1; }
+  .js .state .status { animation: none; background: var(--run-bg); color: var(--run); }
+  .js .phase-dot { animation: none; background: var(--run); }
+  .lede { font-size: 10.5pt; margin-top: 12px; max-width: none; }
+  .block { padding-top: 18px; }
+  h2 { font-size: 15pt; margin-bottom: 8px; break-after: avoid; }
+  .intro { margin: -4px 0 8px; max-width: none; break-after: avoid; }
+  .focus { gap: 18px; }
+  .focus h3 { font-size: 11pt; margin-bottom: 3px; }
+  .focus p { font-size: 9.5pt; }
+  .rows > li { grid-template-columns: 124px 1fr; gap: 14px; padding: 8px 0; break-inside: avoid; }
+  .rows .side { font-size: 9pt; padding-top: 2px; white-space: nowrap; }
+  .rows h3 { font-size: 12pt; margin-bottom: 1px; }
+  .rows h3 small { font-size: 10pt; }
+  .rows p { max-width: none; }
+  .cols { gap: 14px 28px; padding-top: 10px; break-inside: avoid; }
+  .cols h3 { font-size: 11pt; margin-bottom: 3px; }
+  .cols p + h3 { margin-top: 10px; }
+  footer { margin-top: 16px; }
+  footer .wrap { padding-top: 8px; padding-bottom: 0; font-size: 9pt; }
+  footer .site { display: none; }
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<header class="band">
+  <div class="wrap">
+    <div class="bar">
+      <span class="mark">goguzgungor<span class="tld">.github.io</span></span>
+      <nav aria-label="Links">
+        <a class="hide-sm" href="https://www.linkedin.com/in/goktugoguzgungor" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="hide-sm" href="https://github.com/Goguzgungor" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:goguzgungor59@gmail.com">Email</a>
+        <a class="pdf" href="cv.pdf" download="Goktug-Oguz-Gungor-CV.pdf">Download PDF</a>
+      </nav>
+    </div>
+    <p class="role">Platform Engineer, AI Infrastructure. Based in Istanbul.</p>
+    <h1 id="name"><span>Göktuğ Oğuz</span> <span>Güngör</span></h1>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="thesis" role="group" aria-label="What I work on, written as a Kubernetes object">
+    <div class="thesis-head">
+      <span>thesis.yaml</span>
+      <span class="phase"><span class="phase-dot" aria-hidden="true"></span><span>phase: <span class="swap"><span class="was" aria-hidden="true">Pending</span><span class="now">Running</span></span></span></span>
+    </div>
+    <dl class="state">
+      <div class="spec"><dt>spec</dt><dd>LLM inference every team can share.</dd></div>
+      <div class="status"><dt>status</dt><dd><span class="swap"><span class="was" aria-hidden="true">Pending</span><span class="now">Running on shared GPUs.</span></span></dd></div>
+    </dl>
+    <ul class="conditions" aria-label="Conditions">
+      <li><span class="tick" aria-hidden="true">✓</span><span class="type">Scheduled</span><span class="note">GPUs are pooled across teams, not owned by one</span></li>
+      <li><span class="tick" aria-hidden="true">✓</span><span class="type">Isolated</span><span class="note">quotas keep tenants out of each other's way</span></li>
+      <li><span class="tick" aria-hidden="true">✓</span><span class="type">Observable</span><span class="note">you can see who used what</span></li>
+      <li><span class="tick" aria-hidden="true">✓</span><span class="type">Ready</span><span class="note">it stays up while people depend on it</span></li>
+    </ul>
+  </section>
+
+  <p class="lede">I'm a platform engineer. By day I <strong>run Kubernetes and OpenShift at large scale in a regulated bank</strong>. On my own time I work on <strong>the open-source projects that serve LLMs on Kubernetes</strong>. For two years I was also the founding engineer of a stablecoin whose treasury grew past $30M.</p>
+
+  <section class="block" aria-labelledby="focus-h">
+    <h2 id="focus-h">What I work on</h2>
+    <div class="focus">
+      <div>
+        <h3>Clusters many teams share</h3>
+        <p>Kubernetes and OpenShift at large scale, under banking regulation. Changes ship through GitOps, and the platform has to stay boring for the teams that build on it.</p>
+      </div>
+      <div>
+        <h3>LLM inference as a platform</h3>
+        <p>Serving a model to one team is easy. Serving it to every team on the same GPUs takes pooling, scheduling and quotas. That's the part of the stack I contribute to.</p>
+      </div>
+      <div>
+        <h3>Knowing what's running</h3>
+        <p>Alerting and recording rules, custom exporters, dashboards. On a shared platform you have to see who used what before you can promise anything.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="exp-h">
+    <h2 id="exp-h">Experience</h2>
+    <ol class="rows">
+      <li>
+        <div class="side">Jul 2024 – now</div>
+        <div>
+          <h3>Türkiye İş Bankası <small>Platform Engineer</small></h3>
+          <p>Platform Engineering team. I operate Kubernetes and OpenShift at large scale in a regulated bank: GitOps delivery, observability and production incident response. I built the internal developer portal that application teams use, and rebuilt a critical platform job to run in parallel, which made it 11 times faster.</p>
+        </div>
+      </li>
+      <li>
+        <div class="side">Jun 2024 – Mar 2026</div>
+        <div>
+          <h3>Piku Finance <small>Founding Engineer, remote</small></h3>
+          <p>Piku is the team behind USP, a yield-bearing stablecoin on Ethereum mainnet. I led a three-person engineering team through mainnet launch, designed and ran production on AWS EKS, and built the treasury security model on OAuth2 and Fireblocks custody for a treasury that grew past $30M. We shipped through four independent smart contract audits and full penetration testing.</p>
+        </div>
+      </li>
+      <li>
+        <div class="side">Nov 2023 – Jul 2024</div>
+        <div>
+          <h3>McQueen Labs <small>Software Engineer, contract</small></h3>
+          <p>Designed the architecture and built the MVP of MCQ Markets, an SEC-qualified (Regulation A) platform for fractional investment in collector cars. NestJS and PostgreSQL on DigitalOcean.</p>
+        </div>
+      </li>
+      <li>
+        <div class="side">Jul – Sep 2023</div>
+        <div>
+          <h3>OBSS <small>Back End Developer, intern</small></h3>
+          <p>Java and Spring.</p>
+        </div>
+      </li>
+      <li>
+        <div class="side">Aug 2022 – Jun 2023</div>
+        <div>
+          <h3>Digital Operation Services <small>Software Developer, then Back End Developer</small></h3>
+          <p>Backend and mobile work with NestJS and Flutter.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="block" aria-labelledby="oss-h">
+    <h2 id="oss-h">Open source</h2>
+    <p class="intro">Merged work in the projects that serve and schedule models on Kubernetes. I do this on my own time.</p>
+    <ul class="rows">
+      <li>
+        <div class="side"><span class="merged">Merged</span></div>
+        <div>
+          <h3><a href="https://github.com/kubernetes-sigs/lws/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">LeaderWorkerSet</a> <small>kubernetes-sigs/lws</small></h3>
+          <p>Hardened the controller deployment: the manager pod now runs with the RuntimeDefault seccomp profile.</p>
+        </div>
+      </li>
+      <li>
+        <div class="side"><span class="merged">Merged</span></div>
+        <div>
+          <h3><a href="https://github.com/kaito-project/kaito/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">KAITO</a> <small>kaito-project/kaito</small></h3>
+          <p>The same seccomp hardening for the RAGEngine controller pod.</p>
+        </div>
+      </li>
+      <li>
+        <div class="side"><span class="merged">Merged</span></div>
+        <div>
+          <h3><a href="https://github.com/sgl-project/rbg/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">RBG</a> <small>sgl-project/rbg</small></h3>
+          <p>Two fixes to the controller manager: readiness and liveness probes, and draining webhook traffic before it shuts down.</p>
+        </div>
+      </li>
+      <li>
+        <div class="side"><span class="merged">Merged</span></div>
+        <div>
+          <h3><a href="https://github.com/microsoft/TinyTroupe/pull/151" target="_blank" rel="noopener">TinyTroupe</a> <small>microsoft/TinyTroupe</small></h3>
+          <p>A multi-agent vision example with three agents and two scenes, about 4,200 lines.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="proj-h">
+    <h2 id="proj-h">Projects</h2>
+    <ul class="rows">
+      <li>
+        <div class="side">Open source</div>
+        <div>
+          <h3><a href="https://github.com/Goguzgungor/arckive" target="_blank" rel="noopener">Arckive</a></h3>
+          <p>A Kubernetes operator that indexes smart contract events into your own Postgres. You declare an Indexer resource, the operator runs the worker, and each event lands in a table you can query with plain SQL.</p>
+        </div>
+      </li>
+      <li>
+        <div class="side">Apr – Oct 2025</div>
+        <div>
+          <h3>Finch Network <small>payment architecture, consulting</small></h3>
+          <p>Finch runs advertising screens in venues and shares the ad revenue with them. I led the backend and blockchain work and designed the payment flow end to end: a customized Coinbase Onramp integration on Base, with the webhook, idempotency and payout layers around it.</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="more-h">
+    <h2 id="more-h">Background</h2>
+    <div class="cols">
+      <div>
+        <h3>Stack</h3>
+        <p>Kubernetes, OpenShift, Go, TypeScript, Python, AWS, ArgoCD, Prometheus, Grafana, Kafka, PostgreSQL, Docker.</p>
+        <h3>Education</h3>
+        <p><b>BSc Mathematical Engineering</b>, Yıldız Technical University. I wrote my thesis on federated learning.</p>
+      </div>
+      <div>
+        <h3>Community</h3>
+        <p>ETH Privacy hackathon winner and Solana Hyperdrive honorable mention. Superteam Turkey mentor, with 120+ students in the Advanced Solana Bootcamp.</p>
+        <h3>Writing and running</h3>
+        <p>I write <a href="https://medium.com/@goguzgungor59" target="_blank" rel="noopener">on Medium</a> about cloud native and backend architecture, and I run marathons.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <ul>
+      <li><a href="mailto:goguzgungor59@gmail.com">goguzgungor59@gmail.com</a></li>
+      <li><a href="https://www.linkedin.com/in/goktugoguzgungor" target="_blank" rel="noopener">linkedin.com/in/goktugoguzgungor</a></li>
+      <li><a href="https://github.com/Goguzgungor" target="_blank" rel="noopener">github.com/Goguzgungor</a></li>
+    </ul>
+    <span class="site">goguzgungor.github.io</span>
+  </div>
+</footer>
+</body>
+</html>
