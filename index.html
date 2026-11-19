@@ -266,7 +266,7 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
       <article class="item" data-role="isbank">
         <h2>Türkiye İş Bankası</h2>
         <p class="meta">Jul 2024 – now / Platform Engineer</p>
-        <p class="desc">Platform Engineering team. I operate Kubernetes and OpenShift at large scale in a regulated bank: GitOps delivery, observability and production incident response. I built the internal developer portal that application teams use, and rebuilt a critical platform job to run in parallel, which made it many times faster.</p>
+        <p class="desc">I operate Kubernetes and OpenShift at large scale in a regulated bank, and build and run its production LLM inference infrastructure: vLLM and llm-d on Red Hat OpenShift AI, with GPU node pools, scheduling and multi-tenant quotas. I built an MCP integration between the internal AI coding assistant and the container platform, and the developer portal that application teams use. I redesigned a critical cluster-wide job around Kafka consumer groups and parallel workers, which made it many times faster. GitOps delivery with ArgoCD, monitoring with Prometheus and Grafana, and production incident response.</p>
       </article>
       <article class="item" data-role="piku">
         <h2>Piku Finance</h2>
@@ -295,12 +295,12 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
     <div class="col">
       <p class="lede">Merged work in the projects that serve and schedule models on Kubernetes. I do this on my own time.</p>
       <article class="item">
-        <h2><a href="https://github.com/kubernetes-sigs/lws/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">LeaderWorkerSet</a></h2>
+        <h2><a href="https://github.com/kubernetes-sigs/lws/pull/1330" target="_blank" rel="noopener">LeaderWorkerSet</a></h2>
         <p class="meta">kubernetes-sigs/lws / Merged</p>
         <p class="desc">Hardened the controller deployment: the manager pod now runs with the RuntimeDefault seccomp profile.</p>
       </article>
       <article class="item">
-        <h2><a href="https://github.com/kaito-project/kaito/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">KAITO</a></h2>
+        <h2><a href="https://github.com/kaito-project/kaito/pull/2532" target="_blank" rel="noopener">KAITO</a></h2>
         <p class="meta">kaito-project/kaito / Merged</p>
         <p class="desc">The same seccomp hardening for the RAGEngine controller pod.</p>
       </article>
@@ -351,7 +351,7 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
     <div class="info">
       <section>
         <h2>About</h2>
-        <p>I'm a platform engineer. By day I run Kubernetes and OpenShift at large scale in a regulated bank. On my own time I work on the open-source projects that serve LLMs on Kubernetes. For two years I was also the founding engineer of a stablecoin whose treasury grew past $30M.</p>
+        <p>I'm a platform engineer. By day I run Kubernetes and OpenShift at large scale in a regulated bank, and the LLM inference infrastructure on top of it. On my own time I work on the open-source projects that serve LLMs on Kubernetes. For two years I was also the founding engineer of a stablecoin whose treasury grew past $30M.</p>
       </section>
       <section>
         <h2>What I work on</h2>
@@ -361,7 +361,10 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
       </section>
       <section>
         <h2>Stack</h2>
-        <p>Kubernetes, OpenShift, Go, TypeScript, Python, AWS, ArgoCD, Prometheus, Grafana, Kafka, PostgreSQL, Docker.</p>
+        <p><b>AI infrastructure.</b> vLLM, llm-d, Red Hat OpenShift AI, GPU scheduling, model serving, MCP.</p>
+        <p><b>Platform and cloud.</b> Kubernetes, OpenShift, Docker, ArgoCD, GitOps, CI/CD, Prometheus, Grafana, Ansible, AWS (EKS), Linux.</p>
+        <p><b>Languages.</b> Go, Python, TypeScript, Java.</p>
+        <p><b>Backend and data.</b> FastAPI, NestJS, Spring Boot, PostgreSQL, Kafka, RabbitMQ, Redis.</p>
       </section>
       <section>
         <h2>Education</h2>
@@ -398,7 +401,7 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
       </article>
       <article class="item">
         <h2><a href="cv.pdf">CV</a></h2>
-        <p class="meta">PDF, two pages</p>
+        <p class="meta">PDF, one page</p>
       </article>
     </div>
   </section>
