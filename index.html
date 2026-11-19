@@ -2,429 +2,910 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Göktuğ Oğuz Güngör</title>
 <meta name="description" content="Platform Engineer, AI Infrastructure. Kubernetes and OpenShift at large scale, and open-source work on the projects that serve LLMs on Kubernetes.">
 <meta property="og:title" content="Göktuğ Oğuz Güngör">
-<meta property="og:description" content="Platform Engineer, AI Infrastructure. LLM inference every team can share.">
+<meta property="og:description" content="Platform Engineer, AI Infrastructure. Based in Istanbul.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://goguzgungor.github.io/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232350d2'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#191416">
+<link rel="canonical" href="https://goguzgungor.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23191416'/%3E%3Cpath d='M4 26 L12 9 L17 19 L21 14 L28 26' fill='none' stroke='%23f3e5cc' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;800;900&family=Red+Hat+Mono:wght@400;500&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&family=Inter+Tight:wght@300;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+/* Set the saved theme before first paint, and mark the page as scripted. */
+(function () {
+  var d = document.documentElement;
+  d.classList.add("js");
+  try {
+    d.dataset.theme = localStorage.getItem("theme") === "light" ? "light" : "dark";
+    if (localStorage.getItem("font") === "mono") d.dataset.font = "mono";
+  } catch (e) { d.dataset.theme = "dark"; }
+})();
+</script>
 <style>
+/* One night sky, one range. The frame is the edge of the plate; the range along
+   its foot is the work history (one summit per role). The reading area above it
+   changes with the page; the plate does not move. Cream on night, no accent. */
 :root {
-  --band: #2350d2;
-  --band-ink: #ffffff;
-  --band-soft: #d3ddff;
-  --page: #ffffff;
-  --card: #ffffff;
-  --ink: #0f1b3d;
-  --muted: #56617c;
-  --line: #dce2ee;
-  --link: #2350d2;
-  --run: #17804a;
-  --run-bg: #e3f4ea;
-  --pend: #9a610c;
-  --pend-bg: #fbf0d9;
-  --lift: 0 24px 48px -24px rgba(20, 45, 130, 0.45);
-  --display: 'Red Hat Display', system-ui, sans-serif;
-  --body: 'Red Hat Text', system-ui, sans-serif;
-  --mono: 'Red Hat Mono', ui-monospace, monospace;
+  --night: #191416;
+  --cream: #f3e5cc;
+  --bg: var(--night);
+  --fg: #efe9df;
+  --fg-hi: #f7f2ea;
+  --mut: rgba(239, 233, 223, 0.64);
+  --dim: rgba(239, 233, 223, 0.4);
+  --hair: rgba(239, 233, 223, 0.3);
+  --f-display: "Inter Tight", system-ui, sans-serif;
+  --f-text: "Inter", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --m: 36px;   /* frame inset */
+  --pad: 36px; /* padding inside the frame */
+  --head: 0px; /* header bottom, measured in JS (stacked layout only) */
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --band: #1b3a9c;
-    --band-soft: #c3d0ff;
-    --page: #0c1222;
-    --card: #131b30;
-    --ink: #e9edf7;
-    --muted: #9aa6c0;
-    --line: #26314e;
-    --link: #93b1ff;
-    --run: #5fd391;
-    --run-bg: #10301f;
-    --pend: #e6ae52;
-    --pend-bg: #33270f;
-    --lift: 0 24px 48px -24px rgba(0, 0, 0, 0.7);
-  }
+:root[data-theme="light"] {
+  --bg: #ebe2d1;
+  --fg: #191416;
+  --fg-hi: #191416;
+  --mut: rgba(25, 20, 22, 0.7);
+  --dim: rgba(25, 20, 22, 0.46);
+  --hair: rgba(25, 20, 22, 0.38);
+}
+:root[data-font="mono"] {
+  --f-display: var(--f-mono);
+  --f-text: var(--f-mono);
 }
 
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
 body {
-  margin: 0; background: var(--page); color: var(--ink);
-  font-family: var(--body); font-size: 17px; line-height: 1.6;
-  overflow-x: hidden;
+  background: var(--bg); color: var(--fg);
+  font: 400 12.5px/1.55 var(--f-text);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
-a { color: var(--link); text-decoration: none; }
-a:hover { text-decoration: underline; text-underline-offset: 3px; }
-a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 4px; }
-p { margin: 0; }
-.wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
-.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.js body { overflow: hidden; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+ol, ul { list-style: none; }
+:focus-visible { outline: 1px solid var(--fg); outline-offset: 4px; }
+::selection { background: var(--fg); color: var(--bg); }
 
-/* band: the one loud surface on the page */
-.band { background: var(--band); color: var(--band-ink); padding-bottom: 150px; }
-.bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 64px; }
-.mark { font-family: var(--mono); font-size: 14px; color: var(--band-soft); white-space: nowrap; }
-.bar nav { display: flex; gap: 4px; align-items: center; }
-.bar nav a { font-size: 15px; font-weight: 500; color: var(--band-ink); padding: 6px 10px; border-radius: 6px; }
-.bar nav a:hover { background: rgba(255, 255, 255, 0.14); text-decoration: none; }
-.bar nav a.pdf { background: var(--band-ink); color: var(--band); font-weight: 600; margin-left: 6px; white-space: nowrap; }
-.bar nav a.pdf:hover { background: var(--band-soft); }
-.band a:focus-visible { outline-color: var(--band-ink); }
-.role { font-size: 18px; font-weight: 500; color: var(--band-soft); margin: 56px 0 14px; }
-h1 {
-  font-family: var(--display); font-weight: 900;
-  font-size: clamp(46px, 10.5vw, 116px); line-height: 1; letter-spacing: -0.035em;
-  margin: 0;
-}
-h1 span { display: block; }
+/* ── the plate ── */
+.sky, .plate, .labels, .frame, .content { position: fixed; inset: var(--m); }
+.sky, .plate { display: block; width: calc(100vw - 2 * var(--m)); height: calc(100vh - 2 * var(--m)); pointer-events: none; }
+.sky { z-index: 0; }
+.content { z-index: 1; }
+.plate { z-index: 2; }       /* above the text: the list sinks behind the range as it scrolls */
+.labels { z-index: 3; pointer-events: none; }
+.frame { z-index: 4; border: 1px solid var(--hair); pointer-events: none; transition: border-color 0.4s ease; }
+html:not(.js) .sky, html:not(.js) .plate, html:not(.js) .labels { display: none; }
 
-/* thesis: a Kubernetes object. spec is what's wanted, status is what's running. */
-.thesis {
-  background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  overflow: hidden; margin-top: -110px; box-shadow: var(--lift);
+/* summit labels, in the survey-plate hand */
+.pl {
+  position: absolute; transform: translateY(-50%);
+  display: flex; align-items: center; gap: 7px;
+  font: 500 9.5px/1 var(--f-mono); letter-spacing: 0.14em; white-space: nowrap;
+  color: var(--dim); text-decoration: none;
+  opacity: 0; transition: opacity 0.5s ease, color 0.25s ease;
 }
-.thesis-head {
-  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-  font-family: var(--mono); font-size: 13px; color: var(--muted);
-  padding: 11px 20px; border-bottom: 1px solid var(--line);
-}
-.phase { display: inline-flex; align-items: center; gap: 8px; }
-.phase-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--run); }
-.swap { display: inline-grid; }
-.swap > * { grid-area: 1 / 1; }
-.swap .was { opacity: 0; }
-.state { margin: 0; }
-.state > div { display: grid; grid-template-columns: 96px 1fr; align-items: baseline; padding: 16px 20px; }
-.state dt { font-family: var(--mono); font-size: 14px; color: var(--muted); }
-.state dd {
-  margin: 0; min-width: 0; overflow-wrap: anywhere;
-  font-family: var(--display); font-weight: 800;
-  font-size: clamp(21px, 3.5vw, 35px); line-height: 1.18; letter-spacing: -0.02em;
-}
-.state .status { background: var(--run-bg); color: var(--run); }
-.state .status dt { color: inherit; }
-.conditions { list-style: none; margin: 0; padding: 16px 20px 18px; border-top: 1px solid var(--line); display: grid; gap: 9px; }
-.conditions li { display: grid; grid-template-columns: 20px 112px 1fr; gap: 12px; align-items: center; }
-.conditions .tick {
-  width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center;
-  border: 2px solid var(--run); background: var(--run); color: var(--card);
-  font-size: 11px; font-weight: 700; line-height: 1;
-}
-.conditions .type { font-family: var(--mono); font-size: 14px; font-weight: 500; }
-.conditions .note { font-size: 15px; color: var(--muted); min-width: 0; }
+.pl.flip { transform: translate(-100%, -50%); flex-direction: row-reverse; }
+.labels.show .pl { opacity: 1; pointer-events: auto; }
+.pl b { font-weight: 500; color: var(--fg); transition: color 0.25s ease; }
+.pl i { display: block; width: 12px; height: 1px; background: var(--dim); transition: width 0.25s ease, background-color 0.25s ease; }
+.pl:hover, .pl.on { color: var(--mut); }
+.pl:hover b, .pl.on b { color: var(--fg-hi); }
+.pl:hover i, .pl.on i { width: 20px; background: var(--fg); }
 
-/* load sequence: conditions turn true one by one, then the object reports Running */
-.js .conditions .tick { background: transparent; border-color: var(--pend); color: transparent; animation: turn-true 0.3s ease forwards; }
-.js .conditions li:nth-child(1) .tick { animation-delay: 0.6s; }
-.js .conditions li:nth-child(2) .tick { animation-delay: 1.05s; }
-.js .conditions li:nth-child(3) .tick { animation-delay: 1.5s; }
-.js .conditions li:nth-child(4) .tick { animation-delay: 1.95s; }
-.js .swap .was { opacity: 1; animation: leave 0.3s ease 2.5s forwards; }
-.js .swap .now { opacity: 0; animation: arrive 0.3s ease 2.5s forwards; }
-.js .state .status { background: var(--pend-bg); color: var(--pend); animation: report-running 0.3s ease 2.5s forwards; }
-.js .phase-dot { background: var(--pend); animation: dot-running 0.3s ease 2.5s forwards; }
-@keyframes turn-true { to { background: var(--run); border-color: var(--run); color: var(--card); } }
-@keyframes leave { to { opacity: 0; } }
-@keyframes arrive { to { opacity: 1; } }
-@keyframes report-running { to { background: var(--run-bg); color: var(--run); } }
-@keyframes dot-running { to { background: var(--run); } }
+/* ── header ── */
+.head { position: fixed; z-index: 5; left: calc(var(--m) + var(--pad)); top: calc(var(--m) + var(--pad) - 6px); }
+.name {
+  font: 300 clamp(40px, 4.17vw, 60px)/1 var(--f-display); letter-spacing: -0.035em;
+  color: var(--fg-hi); margin-left: -0.04em; white-space: nowrap;
+}
+:root[data-font="mono"] .name { letter-spacing: -0.07em; font-size: clamp(34px, 3.4vw, 49px); }
+.role { margin-top: 11px; color: var(--mut); }
+.nav { margin-top: 52px; }
+.nav li { height: 27px; }
+.nav a {
+  position: relative; display: inline-block; font-weight: 600; line-height: 27px; text-decoration: none;
+  transition: transform 0.3s ease, color 0.25s ease;
+}
+.nav a::before {
+  content: ""; position: absolute; left: -13px; top: 50%; width: 5px; height: 5px; margin-top: -3px;
+  background: currentColor; opacity: 0; transition: opacity 0.3s ease;
+}
+.nav a:hover { color: var(--fg-hi); }
+.nav a[aria-current="page"] { transform: translateX(13px); color: var(--fg-hi); }
+.nav a[aria-current="page"]::before { opacity: 1; }
+
+/* ── theme switches, set along the plate's left edge ── */
+.switches {
+  position: fixed; z-index: 6; left: calc(var(--m) - 15px); bottom: var(--m);
+  display: flex; gap: 18px; writing-mode: vertical-rl; transform: rotate(180deg);
+  font: 500 10.5px/1 var(--f-text); letter-spacing: 0.02em; color: var(--mut);
+}
+.switches button { display: inline-flex; align-items: center; gap: 6px; line-height: 12px; }
+.switches button::before { content: ""; width: 7px; height: 7px; border: 1px solid currentColor; }
+.switches button[aria-pressed="true"] { color: var(--fg-hi); }
+.switches button[aria-pressed="true"]::before { background: currentColor; }
+.switches .gap { margin-top: 10px; }
+
+/* ── the strip under the plate ── */
+.foot {
+  position: fixed; z-index: 5; left: var(--m); right: var(--m); bottom: 0; height: var(--m);
+  display: flex; justify-content: space-between; align-items: center;
+  font: 500 10px/1 var(--f-text); color: var(--dim);
+}
+
+/* ── the reading area ── */
+.content { overflow: hidden; }
+.page { display: none; position: absolute; inset: 0; overflow-y: auto; scrollbar-width: none; padding: 30px var(--pad) 34vh; }
+.page::-webkit-scrollbar { display: none; }
+.page.on { display: block; animation: pageIn 0.5s ease both; }
+@keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
+/* text fades out as it nears the top and bottom edges of the plate */
+.js .page {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 34px, #000 calc(100% - 34px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 34px, #000 calc(100% - 34px), transparent 100%);
+}
+.js .page[data-page="home"] { -webkit-mask-image: none; mask-image: none; }
+.col { margin-left: auto; width: min(52vw, 760px); }
+
+.lede { margin: 0 0 40px auto; max-width: 44ch; text-align: right; color: var(--mut); }
+.item { margin-bottom: 40px; text-align: right; }
+.item h2 { font: 300 clamp(32px, 3.9vw, 56px)/1.04 var(--f-display); letter-spacing: -0.035em; color: var(--fg-hi); }
+:root[data-font="mono"] .item h2 { letter-spacing: -0.07em; font-size: clamp(26px, 3vw, 43px); }
+.item h2 a { text-decoration: none; }
+.item h2 a:hover, .info a:hover, .item .meta a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.14em; }
+.item .meta { margin-top: 11px; font-weight: 600; }
+.item .desc { margin: 7px 0 0 auto; max-width: 58ch; color: var(--mut); }
+.item { transition: opacity 0.3s ease; }
+.work.focus .item:not(.on) { opacity: 0.42; }
+
+/* home: a short statement, hung just above the low end of the range */
+.page[data-page="home"] { overflow: hidden; padding: 0; }
+.statement { position: absolute; right: var(--pad); bottom: var(--clear, 40vh); font-weight: 600; line-height: 18px; color: var(--fg-hi); }
+.statement span { display: block; }
+
+/* info: a right-hand column, read left to right */
+.info { margin-left: auto; width: min(46ch, 100%); }
+.info section { margin-bottom: 30px; }
+.info h2 { font: 600 12.5px/1.55 var(--f-text); color: var(--fg-hi); margin-bottom: 4px; }
+.info p + p { margin-top: 8px; }
+.info p, .info li { color: var(--mut); }
+.info b { font-weight: 600; color: var(--fg); }
+.info a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--dim); }
+
+/* ── stacked layout: header on top, reading area under it ── */
+@media (max-width: 999px) {
+  :root { --m: 12px; --pad: 18px; }
+  .head { right: calc(var(--m) + var(--pad)); top: calc(var(--m) + var(--pad)); }
+  .name { font-size: clamp(30px, 8.6vw, 44px); white-space: normal; max-width: 6.4em; line-height: 1.02; }
+  :root[data-font="mono"] .name { font-size: clamp(26px, 7.2vw, 38px); max-width: 7.2em; }
+  .role { margin-top: 9px; }
+  .nav { margin-top: 20px; }
+  .nav ol { display: flex; flex-wrap: wrap; gap: 0 18px; }
+  .nav a[aria-current="page"] { transform: none; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+  .nav a::before { display: none; }
+  .switches {
+    writing-mode: horizontal-tb; transform: none; left: auto; bottom: auto;
+    right: calc(var(--m) + var(--pad)); top: calc(var(--m) + var(--pad) + 2px);
+    flex-direction: column; align-items: flex-end; gap: 9px;
+  }
+  .switches button { flex-direction: row-reverse; }
+  .switches .gap { margin-top: 0; }
+  .foot { display: none; }
+  .page { padding: calc(var(--head) + 30px) var(--pad) 50vh; }
+  .js .page {
+    -webkit-mask-image: linear-gradient(to bottom, transparent var(--head), #000 calc(var(--head) + 26px));
+    mask-image: linear-gradient(to bottom, transparent var(--head), #000 calc(var(--head) + 26px));
+  }
+  .col { width: 100%; }
+  .item { margin-bottom: 34px; }
+  .item h2 { font-size: clamp(28px, 7.6vw, 40px); }
+  .pl { font-size: 8.5px; letter-spacing: 0.1em; }
+  .pl .yr { display: none; }
+}
+
+/* ── without scripts: one plain page, top to bottom ── */
+html:not(.js) .content, html:not(.js) .head, html:not(.js) .page { position: static; }
+html:not(.js) .head { padding: 40px 40px 0; }
+html:not(.js) .page { display: block; padding: 40px; }
+html:not(.js) .statement { position: static; }
+html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: none; }
+
 @media (prefers-reduced-motion: reduce) {
-  .js .conditions .tick, .js .swap .was, .js .swap .now, .js .state .status, .js .phase-dot {
-    animation-duration: 0s; animation-delay: 0s !important;
-  }
-}
-
-.lede { max-width: 680px; font-size: 20px; line-height: 1.55; color: var(--muted); margin-top: 36px; }
-.lede strong { color: var(--ink); font-weight: 500; }
-
-/* sections */
-.block { padding-top: 76px; }
-h2 { font-family: var(--display); font-weight: 800; font-size: clamp(27px, 4vw, 36px); letter-spacing: -0.025em; line-height: 1.1; margin: 0 0 26px; }
-h3 { font-family: var(--display); font-weight: 700; letter-spacing: -0.01em; line-height: 1.25; margin: 0; }
-.intro { max-width: 640px; color: var(--muted); margin: -12px 0 26px; }
-
-.focus { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-.focus > * { min-width: 0; }
-.focus h3 { font-size: 21px; margin-bottom: 8px; }
-.focus p { color: var(--muted); font-size: 16px; }
-
-/* rows: experience, open source, projects share one ruled list */
-.rows { list-style: none; margin: 0; padding: 0; }
-.rows > li { display: grid; grid-template-columns: 170px 1fr; gap: 28px; padding: 22px 0; border-top: 1px solid var(--line); }
-.rows > li > * { min-width: 0; }
-.rows .side { font-size: 15px; color: var(--muted); padding-top: 4px; font-variant-numeric: tabular-nums; }
-.rows h3 { font-size: 22px; margin-bottom: 4px; }
-.rows h3 small { font-family: var(--body); font-size: 16px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
-.rows p { color: var(--muted); max-width: 660px; }
-.merged { display: inline-flex; align-items: center; gap: 7px; color: var(--run); font-weight: 500; }
-.merged::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--run); }
-
-.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 48px; border-top: 1px solid var(--line); padding-top: 26px; }
-.cols > * { min-width: 0; }
-.cols h3 { font-size: 20px; margin-bottom: 8px; }
-.cols p { color: var(--muted); }
-.cols p + h3 { margin-top: 28px; }
-.cols b { color: var(--ink); font-weight: 600; }
-
-footer { margin-top: 96px; border-top: 1px solid var(--line); }
-footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; padding-top: 24px; padding-bottom: 36px; font-size: 15px; color: var(--muted); }
-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
-
-@media screen and (max-width: 760px) {
-  .wrap { padding: 0 16px; }
-  .band { padding-bottom: 120px; }
-  .bar nav a.hide-sm, .mark .tld { display: none; }
-  .role { margin-top: 36px; font-size: 16px; }
-  .rows h3 small { display: block; margin-top: 2px; }
-  .thesis { margin-top: -88px; }
-  .thesis-head, .state > div { padding-left: 16px; padding-right: 16px; }
-  .state > div { grid-template-columns: 66px 1fr; }
-  .conditions { padding-left: 16px; padding-right: 16px; }
-  .conditions li { grid-template-columns: 20px 1fr; row-gap: 0; }
-  .conditions .note { grid-column: 2; font-size: 14px; }
-  .lede { font-size: 18px; }
-  .block { padding-top: 56px; }
-  .focus, .cols { grid-template-columns: 1fr; gap: 24px; }
-  .rows > li { grid-template-columns: 1fr; gap: 2px; padding: 18px 0; }
-  footer { margin-top: 64px; }
-}
-
-/* print / PDF: same content, quiet layout */
-@media print {
-  :root {
-    --band: #fff; --band-ink: #111; --band-soft: #4a4f5a;
-    --page: #fff; --card: #fff; --ink: #111; --muted: #4a4f5a; --line: #d9dde5;
-    --link: #111; --run: #17804a; --run-bg: #e3f4ea; --lift: none;
-  }
-  @page { size: A4; margin: 12mm 14mm; }
-  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body { font-size: 10pt; line-height: 1.45; }
-  .wrap { padding: 0; max-width: none; }
-  .band { padding-bottom: 0; }
-  .bar { display: none; }
-  .role { margin: 0 0 4px; font-size: 11pt; }
-  h1 { font-size: 34pt; }
-  h1 span { display: inline; }
-  .thesis { margin-top: 14px; border-radius: 8px; }
-  .thesis-head { padding: 6px 12px; font-size: 8pt; }
-  .state > div { padding: 7px 12px; grid-template-columns: 60px 1fr; }
-  .state dt { font-size: 8.5pt; }
-  .state dd { font-size: 14pt; }
-  .conditions { padding: 9px 12px; gap: 4px; }
-  .conditions li { grid-template-columns: 14px 86px 1fr; gap: 8px; }
-  .conditions .tick { width: 13px; height: 13px; font-size: 7pt; border-width: 1px; }
-  .conditions .type, .conditions .note { font-size: 9pt; }
-  .js .conditions .tick { animation: none; background: var(--run); border-color: var(--run); color: #fff; }
-  .js .swap .was { animation: none; opacity: 0; }
-  .js .swap .now { animation: none; opacity: 1; }
-  .js .state .status { animation: none; background: var(--run-bg); color: var(--run); }
-  .js .phase-dot { animation: none; background: var(--run); }
-  .lede { font-size: 10.5pt; margin-top: 12px; max-width: none; }
-  .block { padding-top: 18px; }
-  h2 { font-size: 15pt; margin-bottom: 8px; break-after: avoid; }
-  .intro { margin: -4px 0 8px; max-width: none; break-after: avoid; }
-  .focus { gap: 18px; }
-  .focus h3 { font-size: 11pt; margin-bottom: 3px; }
-  .focus p { font-size: 9.5pt; }
-  .rows > li { grid-template-columns: 124px 1fr; gap: 14px; padding: 8px 0; break-inside: avoid; }
-  .rows .side { font-size: 9pt; padding-top: 2px; white-space: nowrap; }
-  .rows h3 { font-size: 12pt; margin-bottom: 1px; }
-  .rows h3 small { font-size: 10pt; }
-  .rows p { max-width: none; }
-  .cols { gap: 14px 28px; padding-top: 10px; break-inside: avoid; }
-  .cols h3 { font-size: 11pt; margin-bottom: 3px; }
-  .cols p + h3 { margin-top: 10px; }
-  footer { margin-top: 16px; }
-  footer .wrap { padding-top: 8px; padding-bottom: 0; font-size: 9pt; }
-  footer .site { display: none; }
+  .page.on { animation: none; }
+  body, .frame, .nav a, .pl, .item { transition: none; }
 }
 </style>
-<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
-<header class="band">
-  <div class="wrap">
-    <div class="bar">
-      <span class="mark">goguzgungor<span class="tld">.github.io</span></span>
-      <nav aria-label="Links">
-        <a class="hide-sm" href="https://www.linkedin.com/in/goktugoguzgungor" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="hide-sm" href="https://github.com/Goguzgungor" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:goguzgungor59@gmail.com">Email</a>
-        <a class="pdf" href="cv.pdf" download="Goktug-Oguz-Gungor-CV.pdf">Download PDF</a>
-      </nav>
-    </div>
-    <p class="role">Platform Engineer, AI Infrastructure. Based in Istanbul.</p>
-    <h1 id="name"><span>Göktuğ Oğuz</span> <span>Güngör</span></h1>
-  </div>
+
+<canvas class="sky" id="Sky" aria-hidden="true"></canvas>
+
+<header class="head" id="Head">
+  <h1 class="name">Göktuğ Oğuz Güngör</h1>
+  <p class="role">Platform Engineer, AI Infrastructure</p>
+  <nav class="nav" aria-label="Sections">
+    <ol>
+      <li><a href="#/" data-nav="home">Home</a></li>
+      <li><a href="#/work" data-nav="work">Work</a></li>
+      <li><a href="#/open-source" data-nav="open-source">Open source</a></li>
+      <li><a href="#/projects" data-nav="projects">Projects</a></li>
+      <li><a href="#/info" data-nav="info">Info</a></li>
+      <li><a href="#/contact" data-nav="contact">Contact</a></li>
+    </ol>
+  </nav>
 </header>
 
-<main class="wrap">
-  <section class="thesis" role="group" aria-label="What I work on, written as a Kubernetes object">
-    <div class="thesis-head">
-      <span>thesis.yaml</span>
-      <span class="phase"><span class="phase-dot" aria-hidden="true"></span><span>phase: <span class="swap"><span class="was" aria-hidden="true">Pending</span><span class="now">Running</span></span></span></span>
+<main class="content" id="Content">
+
+  <section class="page on" data-page="home" aria-label="Home">
+    <p class="statement" id="Statement">
+      <span>Platform engineer</span>
+      <span>in Istanbul.</span>
+      <span>By day I run</span>
+      <span>Kubernetes and OpenShift</span>
+      <span>at large scale</span>
+      <span>in a regulated bank.</span>
+      <span>On my own time</span>
+      <span>I work on</span>
+      <span>the open-source projects</span>
+      <span>that serve LLMs</span>
+      <span>on Kubernetes.</span>
+    </p>
+  </section>
+
+  <section class="page" data-page="work" aria-label="Work">
+    <div class="col work" id="Work">
+      <article class="item" data-role="isbank">
+        <h2>Türkiye İş Bankası</h2>
+        <p class="meta">Jul 2024 – now / Platform Engineer</p>
+        <p class="desc">Platform Engineering team. I operate Kubernetes and OpenShift at large scale in a regulated bank: GitOps delivery, observability and production incident response. I built the internal developer portal that application teams use, and rebuilt a critical platform job to run in parallel, which made it many times faster.</p>
+      </article>
+      <article class="item" data-role="piku">
+        <h2>Piku Finance</h2>
+        <p class="meta">Jun 2024 – Mar 2026 / Founding Engineer, remote</p>
+        <p class="desc">Piku is the team behind USP, a yield-bearing stablecoin on Ethereum mainnet. I led a three-person engineering team through mainnet launch, designed and ran production on AWS EKS, and built the treasury security model on OAuth2 and Fireblocks custody for a treasury that grew past $30M. We shipped through four independent smart contract audits and full penetration testing.</p>
+      </article>
+      <article class="item" data-role="mcqueen">
+        <h2>McQueen Labs</h2>
+        <p class="meta">Nov 2023 – Jul 2024 / Software Engineer, contract</p>
+        <p class="desc">Designed the architecture and built the MVP of MCQ Markets, an SEC-qualified (Regulation A) platform for fractional investment in collector cars. NestJS and PostgreSQL on DigitalOcean.</p>
+      </article>
+      <article class="item" data-role="obss">
+        <h2>OBSS</h2>
+        <p class="meta">Jul – Sep 2023 / Back End Developer, intern</p>
+        <p class="desc">Java and Spring.</p>
+      </article>
+      <article class="item" data-role="dos">
+        <h2>Digital Operation Services</h2>
+        <p class="meta">Aug 2022 – Jun 2023 / Software Developer, then Back End Developer</p>
+        <p class="desc">Backend and mobile work with NestJS and Flutter.</p>
+      </article>
     </div>
-    <dl class="state">
-      <div class="spec"><dt>spec</dt><dd>LLM inference every team can share.</dd></div>
-      <div class="status"><dt>status</dt><dd><span class="swap"><span class="was" aria-hidden="true">Pending</span><span class="now">Running on shared GPUs.</span></span></dd></div>
-    </dl>
-    <ul class="conditions" aria-label="Conditions">
-      <li><span class="tick" aria-hidden="true">✓</span><span class="type">Scheduled</span><span class="note">GPUs are pooled across teams, not owned by one</span></li>
-      <li><span class="tick" aria-hidden="true">✓</span><span class="type">Isolated</span><span class="note">quotas keep tenants out of each other's way</span></li>
-      <li><span class="tick" aria-hidden="true">✓</span><span class="type">Observable</span><span class="note">you can see who used what</span></li>
-      <li><span class="tick" aria-hidden="true">✓</span><span class="type">Ready</span><span class="note">it stays up while people depend on it</span></li>
-    </ul>
   </section>
 
-  <p class="lede">I'm a platform engineer. By day I <strong>run Kubernetes and OpenShift at large scale in a regulated bank</strong>. On my own time I work on <strong>the open-source projects that serve LLMs on Kubernetes</strong>. For two years I was also the founding engineer of a stablecoin whose treasury grew past $30M.</p>
-
-  <section class="block" aria-labelledby="focus-h">
-    <h2 id="focus-h">What I work on</h2>
-    <div class="focus">
-      <div>
-        <h3>Clusters many teams share</h3>
-        <p>Kubernetes and OpenShift at large scale, under banking regulation. Changes ship through GitOps, and the platform has to stay boring for the teams that build on it.</p>
-      </div>
-      <div>
-        <h3>LLM inference as a platform</h3>
-        <p>Serving a model to one team is easy. Serving it to every team on the same GPUs takes pooling, scheduling and quotas. That's the part of the stack I contribute to.</p>
-      </div>
-      <div>
-        <h3>Knowing what's running</h3>
-        <p>Alerting and recording rules, custom exporters, dashboards. On a shared platform you have to see who used what before you can promise anything.</p>
-      </div>
+  <section class="page" data-page="open-source" aria-label="Open source">
+    <div class="col">
+      <p class="lede">Merged work in the projects that serve and schedule models on Kubernetes. I do this on my own time.</p>
+      <article class="item">
+        <h2><a href="https://github.com/kubernetes-sigs/lws/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">LeaderWorkerSet</a></h2>
+        <p class="meta">kubernetes-sigs/lws / Merged</p>
+        <p class="desc">Hardened the controller deployment: the manager pod now runs with the RuntimeDefault seccomp profile.</p>
+      </article>
+      <article class="item">
+        <h2><a href="https://github.com/kaito-project/kaito/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">KAITO</a></h2>
+        <p class="meta">kaito-project/kaito / Merged</p>
+        <p class="desc">The same seccomp hardening for the RAGEngine controller pod.</p>
+      </article>
+      <article class="item">
+        <h2><a href="https://github.com/sgl-project/rbg/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">RBG</a></h2>
+        <p class="meta">sgl-project/rbg / Merged</p>
+        <p class="desc">Two fixes to the controller manager: readiness and liveness probes, and draining webhook traffic before it shuts down.</p>
+      </article>
+      <article class="item">
+        <h2><a href="https://github.com/microsoft/TinyTroupe/pull/151" target="_blank" rel="noopener">TinyTroupe</a></h2>
+        <p class="meta">microsoft/TinyTroupe / Merged</p>
+        <p class="desc">A multi-agent vision example with three agents and two scenes, about 4,200 lines.</p>
+      </article>
     </div>
   </section>
 
-  <section class="block" aria-labelledby="exp-h">
-    <h2 id="exp-h">Experience</h2>
-    <ol class="rows">
-      <li>
-        <div class="side">Jul 2024 – now</div>
-        <div>
-          <h3>Türkiye İş Bankası <small>Platform Engineer</small></h3>
-          <p>Platform Engineering team. I operate Kubernetes and OpenShift at large scale in a regulated bank: GitOps delivery, observability and production incident response. I built the internal developer portal that application teams use, and rebuilt a critical platform job to run in parallel, which made it 11 times faster.</p>
-        </div>
-      </li>
-      <li>
-        <div class="side">Jun 2024 – Mar 2026</div>
-        <div>
-          <h3>Piku Finance <small>Founding Engineer, remote</small></h3>
-          <p>Piku is the team behind USP, a yield-bearing stablecoin on Ethereum mainnet. I led a three-person engineering team through mainnet launch, designed and ran production on AWS EKS, and built the treasury security model on OAuth2 and Fireblocks custody for a treasury that grew past $30M. We shipped through four independent smart contract audits and full penetration testing.</p>
-        </div>
-      </li>
-      <li>
-        <div class="side">Nov 2023 – Jul 2024</div>
-        <div>
-          <h3>McQueen Labs <small>Software Engineer, contract</small></h3>
-          <p>Designed the architecture and built the MVP of MCQ Markets, an SEC-qualified (Regulation A) platform for fractional investment in collector cars. NestJS and PostgreSQL on DigitalOcean.</p>
-        </div>
-      </li>
-      <li>
-        <div class="side">Jul – Sep 2023</div>
-        <div>
-          <h3>OBSS <small>Back End Developer, intern</small></h3>
-          <p>Java and Spring.</p>
-        </div>
-      </li>
-      <li>
-        <div class="side">Aug 2022 – Jun 2023</div>
-        <div>
-          <h3>Digital Operation Services <small>Software Developer, then Back End Developer</small></h3>
-          <p>Backend and mobile work with NestJS and Flutter.</p>
-        </div>
-      </li>
-    </ol>
+  <section class="page" data-page="projects" aria-label="Projects">
+    <div class="col">
+      <article class="item">
+        <h2><a href="https://yieldpilot.org/" target="_blank" rel="noopener">YieldPilot</a></h2>
+        <p class="meta">Open source / Stellar / <a href="https://github.com/Goguzgungor/yieldpilot" target="_blank" rel="noopener">Source</a></p>
+        <p class="desc">An autonomous agent that finds the highest safe yield for idle USDC on Stellar. It runs on Vigil: open-source risk ratings for lending pools, signed into a Soroban registry and enforced by a smart-account policy. The range behind this page is drawn by its plate engine.</p>
+      </article>
+      <article class="item">
+        <h2><a href="https://github.com/Goguzgungor/arckive" target="_blank" rel="noopener">Arckive</a></h2>
+        <p class="meta">Open source / Kubernetes operator</p>
+        <p class="desc">A Kubernetes operator that indexes smart contract events into your own Postgres. You declare an Indexer resource, the operator runs the worker, and each event lands in a table you can query with plain SQL.</p>
+      </article>
+      <article class="item">
+        <h2>Finch Network</h2>
+        <p class="meta">Apr – Oct 2025 / Payment architecture, consulting</p>
+        <p class="desc">Finch runs advertising screens in venues and shares the ad revenue with them. I led the backend and blockchain work and designed the payment flow end to end: a customized Coinbase Onramp integration on Base, with the webhook, idempotency and payout layers around it.</p>
+      </article>
+      <article class="item">
+        <h2><a href="https://github.com/Goguzgungor/sonata" target="_blank" rel="noopener">Sonata</a></h2>
+        <p class="meta">Open source / Stellar / Preview</p>
+        <p class="desc">An API and MCP layer for Stellar contracts.</p>
+      </article>
+      <article class="item">
+        <h2><a href="https://github.com/Goguzgungor/hourglass" target="_blank" rel="noopener">Hourglass</a></h2>
+        <p class="meta">Open source / Soroban</p>
+        <p class="desc">Token streaming on Stellar. A clean-room reimplementation inspired by Sablier's public Lockup protocol.</p>
+      </article>
+    </div>
   </section>
 
-  <section class="block" aria-labelledby="oss-h">
-    <h2 id="oss-h">Open source</h2>
-    <p class="intro">Merged work in the projects that serve and schedule models on Kubernetes. I do this on my own time.</p>
-    <ul class="rows">
-      <li>
-        <div class="side"><span class="merged">Merged</span></div>
-        <div>
-          <h3><a href="https://github.com/kubernetes-sigs/lws/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">LeaderWorkerSet</a> <small>kubernetes-sigs/lws</small></h3>
-          <p>Hardened the controller deployment: the manager pod now runs with the RuntimeDefault seccomp profile.</p>
-        </div>
-      </li>
-      <li>
-        <div class="side"><span class="merged">Merged</span></div>
-        <div>
-          <h3><a href="https://github.com/kaito-project/kaito/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">KAITO</a> <small>kaito-project/kaito</small></h3>
-          <p>The same seccomp hardening for the RAGEngine controller pod.</p>
-        </div>
-      </li>
-      <li>
-        <div class="side"><span class="merged">Merged</span></div>
-        <div>
-          <h3><a href="https://github.com/sgl-project/rbg/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">RBG</a> <small>sgl-project/rbg</small></h3>
-          <p>Two fixes to the controller manager: readiness and liveness probes, and draining webhook traffic before it shuts down.</p>
-        </div>
-      </li>
-      <li>
-        <div class="side"><span class="merged">Merged</span></div>
-        <div>
-          <h3><a href="https://github.com/microsoft/TinyTroupe/pull/151" target="_blank" rel="noopener">TinyTroupe</a> <small>microsoft/TinyTroupe</small></h3>
-          <p>A multi-agent vision example with three agents and two scenes, about 4,200 lines.</p>
-        </div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="block" aria-labelledby="proj-h">
-    <h2 id="proj-h">Projects</h2>
-    <ul class="rows">
-      <li>
-        <div class="side">Open source</div>
-        <div>
-          <h3><a href="https://github.com/Goguzgungor/arckive" target="_blank" rel="noopener">Arckive</a></h3>
-          <p>A Kubernetes operator that indexes smart contract events into your own Postgres. You declare an Indexer resource, the operator runs the worker, and each event lands in a table you can query with plain SQL.</p>
-        </div>
-      </li>
-      <li>
-        <div class="side">Apr – Oct 2025</div>
-        <div>
-          <h3>Finch Network <small>payment architecture, consulting</small></h3>
-          <p>Finch runs advertising screens in venues and shares the ad revenue with them. I led the backend and blockchain work and designed the payment flow end to end: a customized Coinbase Onramp integration on Base, with the webhook, idempotency and payout layers around it.</p>
-        </div>
-      </li>
-    </ul>
-  </section>
-
-  <section class="block" aria-labelledby="more-h">
-    <h2 id="more-h">Background</h2>
-    <div class="cols">
-      <div>
-        <h3>Stack</h3>
+  <section class="page" data-page="info" aria-label="Info">
+    <div class="info">
+      <section>
+        <h2>About</h2>
+        <p>I'm a platform engineer. By day I run Kubernetes and OpenShift at large scale in a regulated bank. On my own time I work on the open-source projects that serve LLMs on Kubernetes. For two years I was also the founding engineer of a stablecoin whose treasury grew past $30M.</p>
+      </section>
+      <section>
+        <h2>What I work on</h2>
+        <p><b>Clusters many teams share.</b> Kubernetes and OpenShift at large scale, under banking regulation. Changes ship through GitOps, and the platform has to stay boring for the teams that build on it.</p>
+        <p><b>LLM inference as a platform.</b> Serving a model to one team is easy. Serving it to every team on the same GPUs takes pooling, scheduling and quotas. That's the part of the stack I contribute to.</p>
+        <p><b>Knowing what's running.</b> Alerting and recording rules, custom exporters, dashboards. On a shared platform you have to see who used what before you can promise anything.</p>
+      </section>
+      <section>
+        <h2>Stack</h2>
         <p>Kubernetes, OpenShift, Go, TypeScript, Python, AWS, ArgoCD, Prometheus, Grafana, Kafka, PostgreSQL, Docker.</p>
-        <h3>Education</h3>
-        <p><b>BSc Mathematical Engineering</b>, Yıldız Technical University. I wrote my thesis on federated learning.</p>
-      </div>
-      <div>
-        <h3>Community</h3>
+      </section>
+      <section>
+        <h2>Education</h2>
+        <p>BSc Mathematical Engineering, Yıldız Technical University. I wrote my thesis on federated learning.</p>
+      </section>
+      <section>
+        <h2>Community</h2>
         <p>ETH Privacy hackathon winner and Solana Hyperdrive honorable mention. Superteam Turkey mentor, with 120+ students in the Advanced Solana Bootcamp.</p>
-        <h3>Writing and running</h3>
+      </section>
+      <section>
+        <h2>Writing and running</h2>
         <p>I write <a href="https://medium.com/@goguzgungor59" target="_blank" rel="noopener">on Medium</a> about cloud native and backend architecture, and I run marathons.</p>
-      </div>
+      </section>
+      <section>
+        <h2>Colophon</h2>
+        <p>The layout is after <a href="https://p5aholic.me/" target="_blank" rel="noopener">Keita Yamada's portfolio</a>, written from scratch. The range is the plate from <a href="https://yieldpilot.org/" target="_blank" rel="noopener">YieldPilot</a>, redrawn here as my work history: one summit per role, taller the longer I stayed, most recent on the left.</p>
+      </section>
     </div>
   </section>
+
+  <section class="page" data-page="contact" aria-label="Contact">
+    <div class="col">
+      <article class="item">
+        <h2><a href="mailto:goguzgungor59@gmail.com">Email</a></h2>
+        <p class="meta">goguzgungor59@gmail.com</p>
+      </article>
+      <article class="item">
+        <h2><a href="https://www.linkedin.com/in/goktugoguzgungor" target="_blank" rel="noopener">LinkedIn</a></h2>
+        <p class="meta">linkedin.com/in/goktugoguzgungor</p>
+      </article>
+      <article class="item">
+        <h2><a href="https://github.com/Goguzgungor" target="_blank" rel="noopener">GitHub</a></h2>
+        <p class="meta">github.com/Goguzgungor</p>
+      </article>
+      <article class="item">
+        <h2><a href="cv.pdf">CV</a></h2>
+        <p class="meta">PDF, two pages</p>
+      </article>
+    </div>
+  </section>
+
 </main>
 
-<footer>
-  <div class="wrap">
-    <ul>
-      <li><a href="mailto:goguzgungor59@gmail.com">goguzgungor59@gmail.com</a></li>
-      <li><a href="https://www.linkedin.com/in/goktugoguzgungor" target="_blank" rel="noopener">linkedin.com/in/goktugoguzgungor</a></li>
-      <li><a href="https://github.com/Goguzgungor" target="_blank" rel="noopener">github.com/Goguzgungor</a></li>
-    </ul>
-    <span class="site">goguzgungor.github.io</span>
-  </div>
+<canvas class="plate" id="Plate" aria-hidden="true"></canvas>
+<div class="labels" id="Labels"></div>
+<div class="frame" aria-hidden="true"></div>
+
+<div class="switches" role="group" aria-label="Appearance">
+  <button type="button" data-set-theme="light" aria-pressed="false">Light</button>
+  <button type="button" data-set-theme="dark" aria-pressed="true">Dark</button>
+  <button type="button" class="gap" data-toggle-font aria-pressed="false">Monospaced</button>
+</div>
+
+<footer class="foot">
+  <span>© Göktuğ Oğuz Güngör</span>
+  <span>Fig. 1: work since 2022. Height is time in the role.</span>
 </footer>
+
+<script>
+/* The range is a port of the plate engine from YieldPilot (github.com/Goguzgungor/yieldpilot,
+   Apache-2.0): a dithered print rebuilt only when the viewport or theme changes, plus a
+   light living layer (spray off the ridge, a beam over one summit, a sweep). */
+(function () {
+  "use strict";
+
+  // ── the data the range draws ────────────────────────────────────────────
+  // Most recent first: the leftmost summit is the first row of the Work page.
+  var ROLES = [
+    { id: "isbank",  label: "İŞ BANKASI", years: "2024–NOW",  from: [2024, 7],  to: null },
+    { id: "piku",    label: "PIKU",       years: "2024–2026", from: [2024, 6],  to: [2026, 3] },
+    { id: "mcqueen", label: "MCQUEEN",    years: "2023–2024", from: [2023, 11], to: [2024, 7] },
+    { id: "obss",    label: "OBSS",       years: "2023",      from: [2023, 7],  to: [2023, 9] },
+    { id: "dos",     label: "DOS",        years: "2022–2023", from: [2022, 8],  to: [2023, 6] }
+  ];
+  var now = new Date();
+  ROLES.forEach(function (r) {
+    var to = r.to || [now.getFullYear(), now.getMonth() + 1];
+    r.months = Math.max(1, (to[0] - r.from[0]) * 12 + (to[1] - r.from[1]) + 1);
+  });
+
+  // ── deterministic noise: the same viewport always draws the same range ──
+  function hash(x, y) {
+    var h = Math.imul(x | 0, 374761393) ^ Math.imul(y | 0, 668265263);
+    h = Math.imul(h ^ (h >>> 13), 1274126177);
+    h ^= h >>> 16;
+    return (h >>> 0) / 4294967296;
+  }
+  function vnoise(x, y) {
+    var xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    var u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    var a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1);
+    return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
+  }
+  function fbm(x, y) {
+    return vnoise(x, y) * 0.55 + vnoise(x * 2.03 + 17, y * 2.03 + 9) * 0.3 + vnoise(x * 4.1 + 31, y * 4.1 + 3) * 0.15;
+  }
+  function seeded(seed) {
+    var a = seed | 0;
+    return function () {
+      a = (a + 0x6d2b79f5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function gauss() { return (Math.random() + Math.random() + Math.random() - 1.5) / 1.5; }
+
+  // ── where each role stands: x by recency, summit by months in the role ──
+  // On a wide plate the massif keeps to the left, under the name, and leaves the
+  // right-hand side low for reading. On a narrow one it spans the whole width.
+  function layoutPeaks(g) {
+    var n = ROLES.length, x0 = g.W * (g.stacked ? 0.12 : 0.115), x1 = g.W * (g.stacked ? 0.88 : 0.53);
+    var ceil = Math.max.apply(null, ROLES.map(function (r) { return r.months; }));
+    return ROLES.map(function (r, i) {
+      var depth = 1.25 + 0.5 * hash(i, 4);
+      return {
+        id: r.id,
+        x: x0 + (x1 - x0) * (i / (n - 1)),
+        summit: g.base - (g.base - g.top) * (0.14 + 0.86 * r.months / ceil),
+        w: Math.max(9, g.W * (0.018 + 0.016 * depth)),
+        sh: 0.16 + 0.14 * depth + 0.06 * hash(i, 9),
+        sw: 1.7 + 0.9 * depth
+      };
+    });
+  }
+
+  function computeRidge(peaks, g) {
+    var W = g.W, H = g.H, base = g.base;
+    var ridge = new Float32Array(W), hf = new Float32Array(W);
+    var minS = Math.min.apply(null, peaks.map(function (p) { return p.summit; }));
+    var minSummit = Infinity;
+    for (var x = 0; x < W; x++) {
+      // the ground falls away toward both edges: one massif, night in the lower corners
+      var bx = base + H * 0.3 * Math.pow(Math.abs(x / W - 0.5) * 2, 3.2);
+      var y = bx + (fbm(x * 0.0032, 3.1) - 0.5) * 0.06 * H;
+      for (var i = 0; i < peaks.length; i++) {
+        var p = peaks[i], u = Math.abs(x - p.x) / p.w;
+        var spire = p.summit + (bx - p.summit) * (1 - Math.exp(-u * 1.3));
+        var shoulder = bx - (bx - p.summit) * p.sh * Math.exp(-Math.pow(Math.abs(x - p.x) / (p.w * p.sw), 1.6));
+        var mine = Math.min(spire, shoulder);
+        if (mine < y) y = mine;
+      }
+      var h = clamp((base - y) / (base - minS), 0, 1);
+      y += (fbm(x * 0.052, 7.7) - 0.5) * 0.026 * H * (0.2 + h) + (vnoise(x * 0.31, 1.3) - 0.5) * 0.005 * H;
+      ridge[x] = y;
+      hf[x] = clamp((base - y) / (base - minS), 0, 1);
+      if (y < minSummit) minSummit = y;
+    }
+    return { ridge: ridge, hf: hf, minSummit: minSummit };
+  }
+
+  /** The true top of a summit after crag noise: the highest ridge point near its centre. */
+  function topOf(r, x, w) {
+    var W = r.ridge.length, bx = clamp(Math.round(x), 0, W - 1);
+    for (var i = Math.max(0, Math.round(x - w * 0.35)); i < Math.min(W, Math.round(x + w * 0.35)); i++) {
+      if (r.ridge[i] < r.ridge[bx]) bx = i;
+    }
+    return { x: bx, y: r.ridge[bx] };
+  }
+
+  // ── the engine ──────────────────────────────────────────────────────────
+  var SEED = 20260705;
+  var INKS = {
+    dark:  { rgb: [243, 229, 204], css: "#f3e5cc" },
+    light: { rgb: [25, 20, 22],    css: "#191416" }
+  };
+
+  function Engine(plate, sky) {
+    this.plate = plate; this.sky = sky;
+    this.ctx = plate.getContext("2d"); this.sctx = sky.getContext("2d");
+    this.off = document.createElement("canvas");   // the range, one cell per CSS px
+    this.dust = document.createElement("canvas");  // the sky, behind the text
+    this.scene = null; this.ink = INKS.dark; this.theme = "dark";
+    this.spray = []; this.beam = []; this.twinkle = [];
+    this.sweepState = null; this.revealed = false;
+    this.raf = 0; this.last = 0; this.reduced = false;
+  }
+
+  Engine.prototype.setTheme = function (theme) {
+    this.theme = theme; this.ink = INKS[theme];
+    if (this.scene) { this.buildPrint(); if (this.reduced) this.paint(performance.now(), 0); }
+  };
+
+  Engine.prototype.setScene = function (scene) {
+    this.scene = scene;
+    var W = scene.W, H = scene.H, dpr = scene.dpr, self = this;
+    [[this.plate, this.ctx], [this.sky, this.sctx]].forEach(function (pair) {
+      pair[0].width = Math.round(W * dpr); pair[0].height = Math.round(H * dpr);
+      pair[1].setTransform(dpr, 0, 0, dpr, 0, 0);
+      pair[1].imageSmoothingEnabled = false; // each dither cell stays a crisp square
+    });
+    this.off.width = this.dust.width = W; this.off.height = this.dust.height = H;
+    this.buildPrint();
+    this.spray = [];
+    for (var i = 0, n = Math.round(W * 0.75); i < n; i++) this.spray.push(this.sprayPoint({}, true));
+    this.beam = [];
+    this.twinkle = [];
+    for (var k = 0; k < 60; k++) {
+      this.twinkle.push({
+        x: Math.random() * W, y: Math.random() * Math.max(0, scene.ridge.minSummit - 30),
+        ph: Math.random() * 6.28, sp: 0.4 + Math.random() * 1.2
+      });
+    }
+    if (this.reduced) { this.revealed = true; self.paint(performance.now(), 0); }
+  };
+
+  Engine.prototype.setTarget = function (pt) {
+    if (!this.scene) return;
+    var t = this.scene.target;
+    if (t && pt && t.x === pt.x && t.y === pt.y) return;
+    this.scene.target = pt; this.beam = [];
+  };
+
+  /** A line of light crossing the range. The first pass also develops the print. */
+  Engine.prototype.sweep = function (dur) {
+    if (!this.scene || this.reduced) return;
+    this.sweepState = { t0: performance.now(), dur: dur || 2400 };
+  };
+
+  Engine.prototype.start = function () {
+    if (this.raf || this.reduced) return;
+    var self = this;
+    var loop = function (t) {
+      var dt = Math.min(50, t - (self.last || t));
+      self.last = t; self.paint(t, dt);
+      self.raf = requestAnimationFrame(loop);
+    };
+    this.raf = requestAnimationFrame(loop);
+  };
+  Engine.prototype.stop = function () { cancelAnimationFrame(this.raf); this.raf = 0; this.last = 0; };
+
+  Engine.prototype.buildPrint = function () {
+    var s = this.scene, W = s.W, H = s.H, ridge = s.ridge.ridge, hf = s.ridge.hf, C = this.ink.rgb;
+    var octx = this.off.getContext("2d"), img = octx.createImageData(W, H), d = img.data;
+    var rnd = seeded(SEED);
+    var topY = Math.max(0, Math.floor(s.ridge.minSummit - 0.2 * H)), depth = 0.05 * H;
+    for (var y = topY; y < H; y++) {
+      for (var x = 0; x < W; x++) {
+        var t = y - ridge[x], n = fbm(x * 0.04, y * 0.006), p;
+        if (t >= 0) {
+          // the body: streaky near the ridge, near-solid further down
+          p = Math.min(0.975, (1 - Math.exp(-(t / depth) * (0.4 + 1.15 * n))) * (0.84 + 0.22 * n));
+        } else {
+          // spray above the ridge: taller summits throw more, in vertical tongues
+          var spread = H * 0.016 * (0.4 + 2.5 * hf[x]) * (0.25 + 1.8 * n * n);
+          p = 0.62 * Math.exp(t / spread);
+        }
+        if (rnd() < p) {
+          var k = 0.84 + 0.16 * rnd(), i = (y * W + x) * 4;
+          d[i] = C[0] * k; d[i + 1] = C[1] * k; d[i + 2] = C[2] * k; d[i + 3] = 255;
+        }
+      }
+    }
+    octx.putImageData(img, 0, 0);
+
+    // sky dust: the scattered specks that make the dark read as night
+    var dctx = this.dust.getContext("2d"), dimg = dctx.createImageData(W, H), dd = dimg.data;
+    var count = Math.floor(W * H * 0.0013);
+    for (var j = 0; j < count; j++) {
+      var dx = (rnd() * W) | 0, dy = (rnd() * H) | 0;
+      if (dy >= ridge[dx] - 2) continue;
+      var q = (dy * W + dx) * 4;
+      dd[q] = C[0]; dd[q + 1] = C[1]; dd[q + 2] = C[2]; dd[q + 3] = (36 + rnd() * 150) | 0;
+    }
+    dctx.putImageData(dimg, 0, 0);
+  };
+
+  Engine.prototype.sprayPoint = function (sp, warm) {
+    var s = this.scene, hf = s.ridge.hf, ridge = s.ridge.ridge, x = 0;
+    for (var k = 0; k < 8; k++) {
+      x = (Math.random() * s.W) | 0;
+      if (Math.random() < Math.pow(hf[x], 1.7) + 0.03) break;
+    }
+    sp.x = x + Math.random();
+    sp.y = ridge[x] - Math.random() * 2;
+    sp.vx = (Math.random() - 0.5) * 0.07;
+    sp.vy = -(0.05 + Math.random() * 0.26) * (0.45 + hf[x]);
+    sp.life = 220 + Math.random() * 460;
+    sp.age = warm ? Math.random() * sp.life : 0;
+    if (warm) { sp.x += sp.vx * sp.age; sp.y += sp.vy * sp.age; }
+    return sp;
+  };
+
+  Engine.prototype.paint = function (t, dt) {
+    var s = this.scene;
+    if (!s) return;
+    var ctx = this.ctx, sctx = this.sctx, W = s.W, H = s.H, ridge = s.ridge.ridge;
+    var f = this.reduced ? 0 : dt / 16.67, ts = t / 1000, i;
+
+    // where the sweep is, and how far the print has developed
+    var sw = this.sweepState, sx = null;
+    if (sw) {
+      var k = (t - sw.t0) / sw.dur;
+      if (k >= 1) { this.sweepState = null; this.revealed = true; }
+      else {
+        var e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+        sx = -30 + (W + 60) * e;
+      }
+    }
+    var edge = this.revealed ? W : (sx == null ? 0 : clamp(sx, 0, W));
+
+    // the sky, behind the text
+    sctx.clearRect(0, 0, W, H);
+    sctx.globalAlpha = 1;
+    if (edge > 0) sctx.drawImage(this.dust, 0, 0, edge, H, 0, 0, edge, H);
+    if (!this.reduced) {
+      sctx.fillStyle = this.ink.css;
+      for (i = 0; i < this.twinkle.length; i++) {
+        var tw = this.twinkle[i];
+        if (tw.x > edge) continue;
+        sctx.globalAlpha = 0.1 + 0.5 * Math.pow(Math.abs(Math.sin(ts * tw.sp + tw.ph)), 6);
+        sctx.fillRect(tw.x, tw.y, 1, 1);
+      }
+    }
+
+    // the range, in front of the text
+    ctx.globalCompositeOperation = "source-over";
+    ctx.globalAlpha = 1;
+    ctx.clearRect(0, 0, W, H);
+    if (edge > 0) ctx.drawImage(this.off, 0, 0, edge, H, 0, 0, edge, H);
+    if (this.reduced) return;
+
+    if (sx != null) {
+      if (this.theme === "dark") {
+        // the dots the sweep passes flare
+        ctx.globalCompositeOperation = "lighter";
+        ctx.globalAlpha = 0.55; ctx.drawImage(this.off, sx - 3, 0, 6, H, sx - 3, 0, 6, H);
+        ctx.globalAlpha = 0.16; ctx.drawImage(this.off, sx - 22, 0, 44, H, sx - 22, 0, 44, H);
+        ctx.globalCompositeOperation = "source-over";
+      }
+      var xi = clamp(Math.round(sx), 0, W - 1), yTop = Math.max(0, s.ridge.minSummit - 0.1 * H);
+      ctx.globalAlpha = 0.24; ctx.fillStyle = this.ink.css;
+      ctx.fillRect(Math.round(sx), yTop, 1, Math.max(0, ridge[xi] - yTop));
+    }
+
+    ctx.fillStyle = this.ink.css;
+    for (i = 0; i < this.spray.length; i++) {
+      var p = this.spray[i];
+      p.age += f; p.x += p.vx * f; p.y += p.vy * f;
+      if (p.age > p.life) this.sprayPoint(p, false);
+      if (p.x > edge) continue;
+      ctx.globalAlpha = Math.sin((Math.PI * p.age) / p.life) * 0.85;
+      ctx.fillRect(p.x, p.y, 1, 1);
+    }
+
+    // the beam: a column of light over one summit
+    var tg = s.target;
+    if (tg && tg.x <= edge) {
+      for (i = 0; i < 2; i++) {
+        if (this.beam.length < 260) this.beam.push({ x: tg.x + gauss() * 1.6, y: tg.y - 2, vy: -(0.3 + Math.random() * 0.9) });
+      }
+      var reach = Math.max(10, Math.min(H * 0.17, tg.y - s.beamTop - 8));
+      for (i = this.beam.length - 1; i >= 0; i--) {
+        var b = this.beam[i];
+        b.y += b.vy * f; b.x += gauss() * 0.12 * f;
+        var hgt = (tg.y - b.y) / reach;
+        if (hgt > 1) { this.beam.splice(i, 1); continue; }
+        ctx.globalAlpha = (1 - hgt) * 0.9;
+        ctx.fillRect(b.x, b.y, 1, 1);
+      }
+    }
+    ctx.globalAlpha = 1;
+  };
+
+  // ── the page ────────────────────────────────────────────────────────────
+  var root = document.documentElement;
+  var plateEl = document.getElementById("Plate"), skyEl = document.getElementById("Sky");
+  var head = document.getElementById("Head"), labelsEl = document.getElementById("Labels");
+  var statement = document.getElementById("Statement"), work = document.getElementById("Work");
+  var pages = [].slice.call(document.querySelectorAll(".page"));
+  var navLinks = [].slice.call(document.querySelectorAll("[data-nav]"));
+  var TITLES = { home: "", work: "Work", "open-source": "Open source", projects: "Projects", info: "Info", contact: "Contact" };
+
+  var engine = null, geo = null, current = "home", hovered = null;
+  try { engine = new Engine(plateEl, skyEl); } catch (e) { engine = null; }
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if (engine) engine.reduced = reduce.matches;
+
+  function cssPx(name) { return parseFloat(getComputedStyle(root).getPropertyValue(name)) || 0; }
+
+  // labels: one per summit, hung on a leader long enough to clear its neighbours
+  var labelEls = ROLES.map(function (r) {
+    var a = document.createElement("a");
+    a.className = "pl"; a.href = "#/work"; a.dataset.role = r.id;
+    a.innerHTML = "<i></i><span><b></b><span class=\"yr\"></span></span>";
+    a.querySelector("b").textContent = r.label;
+    a.querySelector(".yr").textContent = " " + r.years;
+    a.setAttribute("aria-label", r.label + " " + r.years + ", on the Work page");
+    a.addEventListener("mouseenter", function () { setHover(r.id); });
+    a.addEventListener("mouseleave", function () { setHover(null); });
+    a.addEventListener("focus", function () { setHover(r.id); });
+    a.addEventListener("blur", function () { setHover(null); });
+    a.addEventListener("click", function () { pendingRole = r.id; });
+    labelsEl.appendChild(a);
+    return a;
+  });
+  var pendingRole = null;
+
+  function layout() {
+    var m = cssPx("--m"), pad = cssPx("--pad");
+    var W = Math.max(200, Math.round(window.innerWidth - 2 * m)), H = Math.max(200, Math.round(window.innerHeight - 2 * m));
+    var stacked = window.innerWidth < 1000;
+    var headBottom = head.getBoundingClientRect().bottom - m;
+    root.style.setProperty("--head", Math.round(headBottom) + "px");
+
+    // summits live between `top` (the longest role) and `base`
+    var g = { W: W, H: H, base: H * 0.955, stacked: stacked };
+    g.top = Math.min(H * 0.76, Math.max(H * (stacked ? 0.6 : 0.5), headBottom + (stacked ? 150 : 70)));
+    var peaks = layoutPeaks(g), ridge = computeRidge(peaks, g);
+    var tops = peaks.map(function (p) { return topOf(ridge, p.x, p.w); });
+    geo = { W: W, H: H, peaks: peaks, ridge: ridge, tops: tops, stacked: stacked };
+
+    var boxes = placeLabels();
+    syncLabels();
+
+    // hang the home statement just above the range and its labels, wherever the range is low
+    var left = W - pad - (statement.offsetWidth || 170) - 24, lo = Infinity;
+    for (var x = Math.max(0, Math.round(left)); x < W; x++) if (ridge.ridge[x] < lo) lo = ridge.ridge[x];
+    boxes.forEach(function (b) { if (b.r > left) lo = Math.min(lo, b.t + 18); });
+    root.style.setProperty("--clear", Math.max(pad, Math.round(H - lo + 46)) + "px");
+
+    if (engine) {
+      engine.setScene({
+        W: W, H: H, dpr: Math.min(2, window.devicePixelRatio || 1), ridge: ridge,
+        target: null, beamTop: Math.max(0, headBottom)
+      });
+    }
+    aim();
+  }
+
+  /** Each label stands beside its summit, like a callout on a survey plate. */
+  function placeLabels() {
+    var placed = [];
+    geo.tops.forEach(function (t, i) {
+      var el = labelEls[i], w = el.offsetWidth || 120, h = (el.offsetHeight || 10) + 8;
+      var flip = t.x + 9 + w > geo.W - 8;
+      var l = flip ? t.x - 9 - w : t.x + 9, y = t.y - 13;
+      var hit = function () {
+        return placed.some(function (b) { return l < b.r + 10 && l + w > b.l - 10 && y - h / 2 < b.b && y + h / 2 > b.t; });
+      };
+      while (hit() && y > 24) y -= 14;
+      el.classList.toggle("flip", flip);
+      el.style.left = (flip ? t.x - 9 : t.x + 9) + "px"; el.style.top = y + "px";
+      placed.push({ l: l, r: l + w, t: y - h / 2, b: y + h / 2 });
+    });
+    return placed;
+  }
+
+  /** Summits are named on Home, and on Work where the plate has room beside the list. */
+  function syncLabels() {
+    labelsEl.classList.toggle("show", current === "home" || (current === "work" && geo && !geo.stacked));
+  }
+
+  /** The beam stands on the role under the pointer, else on the current one. */
+  function aim() {
+    if (!geo) return;
+    var id = hovered || ROLES[0].id, idx = 0;
+    ROLES.forEach(function (r, i) { if (r.id === id) idx = i; });
+    if (engine) engine.setTarget(geo.tops[idx]);
+    labelEls.forEach(function (el) { el.classList.toggle("on", el.dataset.role === hovered); });
+    work.classList.toggle("focus", !!hovered);
+    [].forEach.call(work.children, function (it) { it.classList.toggle("on", it.dataset.role === hovered); });
+  }
+  function setHover(id) { if (hovered !== id) { hovered = id; aim(); } }
+
+  [].forEach.call(work.children, function (it) {
+    it.addEventListener("mouseenter", function () { setHover(it.dataset.role); });
+    it.addEventListener("mouseleave", function () { setHover(null); });
+  });
+
+  // ── routing: one page at a time in the reading area ─────────────────────
+  function route(first) {
+    var id = (location.hash.replace(/^#\/?/, "") || "home").toLowerCase();
+    if (!TITLES.hasOwnProperty(id)) id = "home";
+    var changed = id !== current || first;
+    current = id;
+    pages.forEach(function (p) {
+      var on = p.dataset.page === id;
+      p.classList.toggle("on", on);
+      if (on && changed) p.scrollTop = 0;
+    });
+    navLinks.forEach(function (a) {
+      if (a.dataset.nav === id) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
+    document.title = (TITLES[id] ? TITLES[id] + " · " : "") + "Göktuğ Oğuz Güngör";
+    syncLabels();
+    setHover(null);
+    if (id === "work" && pendingRole) {
+      var row = work.querySelector('[data-role="' + pendingRole + '"]');
+      if (row) row.scrollIntoView({ block: "start", behavior: reduce.matches ? "auto" : "smooth" });
+    }
+    pendingRole = null;
+    if (changed && !first && engine) engine.sweep(2200);
+  }
+  window.addEventListener("hashchange", function () { route(false); });
+
+  // ── appearance ──────────────────────────────────────────────────────────
+  var themeBtns = [].slice.call(document.querySelectorAll("[data-set-theme]"));
+  var fontBtn = document.querySelector("[data-toggle-font]");
+  function save(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function syncSwitches() {
+    themeBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.setTheme === root.dataset.theme)); });
+    fontBtn.setAttribute("aria-pressed", String(root.dataset.font === "mono"));
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = root.dataset.theme === "light" ? "#ebe2d1" : "#191416";
+  }
+  themeBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (root.dataset.theme === b.dataset.setTheme) return;
+      root.dataset.theme = b.dataset.setTheme; save("theme", root.dataset.theme);
+      syncSwitches();
+      if (engine) engine.setTheme(root.dataset.theme);
+    });
+  });
+  fontBtn.addEventListener("click", function () {
+    if (root.dataset.font === "mono") delete root.dataset.font; else root.dataset.font = "mono";
+    save("font", root.dataset.font || "sans");
+    syncSwitches();
+    relayoutSoon(60);
+  });
+
+  // ── lifecycle ───────────────────────────────────────────────────────────
+  var timer = 0;
+  function relayoutSoon(ms) { clearTimeout(timer); timer = setTimeout(layout, ms); }
+  window.addEventListener("resize", function () { relayoutSoon(160); });
+  document.addEventListener("visibilitychange", function () {
+    if (!engine) return;
+    if (document.hidden) engine.stop(); else engine.start();
+  });
+  reduce.addEventListener("change", function () {
+    if (!engine) return;
+    engine.reduced = reduce.matches;
+    if (reduce.matches) { engine.stop(); engine.revealed = true; engine.paint(performance.now(), 0); } else engine.start();
+  });
+
+  syncSwitches();
+  if (engine) engine.theme = root.dataset.theme, engine.ink = INKS[root.dataset.theme] || INKS.dark;
+  layout();
+  route(true);
+  if (engine) { engine.start(); engine.sweep(2600); }
+  // the header's size, and so the range, settles once the webfonts are in
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { relayoutSoon(0); });
+})();
+</script>
 </body>
 </html>
