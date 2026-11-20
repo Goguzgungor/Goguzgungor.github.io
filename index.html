@@ -295,6 +295,11 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
     <div class="col">
       <p class="lede">Merged work in the projects that serve and schedule models on Kubernetes. I do this on my own time.</p>
       <article class="item">
+        <h2><a href="https://github.com/llm-d/llm-d-batch-gateway/pull/781" target="_blank" rel="noopener">llm-d Batch Gateway</a></h2>
+        <p class="meta">llm-d/llm-d-batch-gateway / Merged</p>
+        <p class="desc">The API server now rejects a request that arrives without the auth proxy's tenant header. Before, it served that request as the default tenant.</p>
+      </article>
+      <article class="item">
         <h2><a href="https://github.com/kubernetes-sigs/lws/pull/1330" target="_blank" rel="noopener">LeaderWorkerSet</a></h2>
         <p class="meta">kubernetes-sigs/lws / Merged</p>
         <p class="desc">Hardened the controller deployment: the manager pod now runs with the RuntimeDefault seccomp profile.</p>
@@ -307,7 +312,7 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
       <article class="item">
         <h2><a href="https://github.com/sgl-project/rbg/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">RBG</a></h2>
         <p class="meta">sgl-project/rbg / Merged</p>
-        <p class="desc">Two fixes to the controller manager: readiness and liveness probes, and draining webhook traffic before it shuts down.</p>
+        <p class="desc">Three fixes: readiness and liveness probes for the controller manager, draining webhook traffic before it shuts down, and a recovery annotation that no longer leaks from a role onto its workload.</p>
       </article>
       <article class="item">
         <h2><a href="https://github.com/microsoft/TinyTroupe/pull/151" target="_blank" rel="noopener">TinyTroupe</a></h2>
