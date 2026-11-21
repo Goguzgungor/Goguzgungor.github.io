@@ -295,6 +295,11 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
     <div class="col">
       <p class="lede">Merged work in the projects that serve and schedule models on Kubernetes. I do this on my own time.</p>
       <article class="item">
+        <h2><a href="https://github.com/llm-d/llm-d/pull/3057" target="_blank" rel="noopener">llm-d</a></h2>
+        <p class="meta">llm-d/llm-d / Merged</p>
+        <p class="desc">The multimodal serving guide now scrapes the Encode pods in its E/PD and E/P/D topologies. Before, no PodMonitor selected them, so Prometheus never saw that tier's metrics.</p>
+      </article>
+      <article class="item">
         <h2><a href="https://github.com/llm-d/llm-d-batch-gateway/pull/781" target="_blank" rel="noopener">llm-d Batch Gateway</a></h2>
         <p class="meta">llm-d/llm-d-batch-gateway / Merged</p>
         <p class="desc">The API server now rejects a request that arrives without the auth proxy's tenant header. Before, it served that request as the default tenant.</p>
