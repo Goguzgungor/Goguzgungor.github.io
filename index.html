@@ -295,6 +295,11 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
     <div class="col">
       <p class="lede">Merged work in the projects that serve and schedule models on Kubernetes. I do this on my own time.</p>
       <article class="item">
+        <h2><a href="https://github.com/sgl-project/rbg/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">RBG</a></h2>
+        <p class="meta">sgl-project/rbg / Merged</p>
+        <p class="desc">Five fixes in the Go controllers and the deployment. The admission webhook now rejects role workload types that no controller can reconcile, and RoleBasedGroupSet children created by v0.7 and v0.8 keep their discovery mode after an upgrade. The recovery annotation no longer leaks from a role onto its workload, and the controller manager has probes and drains webhook traffic before it shuts down.</p>
+      </article>
+      <article class="item">
         <h2><a href="https://github.com/kubeai-project/kubeai/pull/796" target="_blank" rel="noopener">KubeAI</a></h2>
         <p class="meta">kubeai-project/kubeai / Merged</p>
         <p class="desc">The Helm chart now creates the model service account in every namespace KubeAI watches. Before, every model pod outside the release namespace was rejected because that service account did not exist.</p>
@@ -318,11 +323,6 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
         <h2><a href="https://github.com/kaito-project/kaito/pull/2532" target="_blank" rel="noopener">KAITO</a></h2>
         <p class="meta">kaito-project/kaito / Merged</p>
         <p class="desc">The same seccomp hardening for the RAGEngine controller pod.</p>
-      </article>
-      <article class="item">
-        <h2><a href="https://github.com/sgl-project/rbg/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">RBG</a></h2>
-        <p class="meta">sgl-project/rbg / Merged</p>
-        <p class="desc">Three fixes: readiness and liveness probes for the controller manager, draining webhook traffic before it shuts down, and a recovery annotation that no longer leaks from a role onto its workload.</p>
       </article>
       <article class="item">
         <h2><a href="https://github.com/microsoft/TinyTroupe/pull/151" target="_blank" rel="noopener">TinyTroupe</a></h2>
