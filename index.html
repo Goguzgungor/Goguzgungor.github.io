@@ -310,9 +310,9 @@ html:not(.js) .switches, html:not(.js) .frame, html:not(.js) .foot { display: no
         <p class="desc">The multimodal serving guide now scrapes the Encode pods in its E/PD and E/P/D topologies. Before, no PodMonitor selected them, so Prometheus never saw that tier's metrics.</p>
       </article>
       <article class="item">
-        <h2><a href="https://github.com/llm-d/llm-d-batch-gateway/pull/781" target="_blank" rel="noopener">llm-d Batch Gateway</a></h2>
+        <h2><a href="https://github.com/llm-d/llm-d-batch-gateway/pulls?q=is%3Apr+author%3AGoguzgungor" target="_blank" rel="noopener">llm-d Batch Gateway</a></h2>
         <p class="meta">llm-d/llm-d-batch-gateway / Merged</p>
-        <p class="desc">The API server now rejects a request that arrives without the auth proxy's tenant header. Before, it served that request as the default tenant.</p>
+        <p class="desc">Two layers of tenant isolation for the API server. It now rejects a request that arrives without the auth proxy's tenant header, where before it served that request as the default tenant. The Helm chart can also add a NetworkPolicy that lets only the pods you list, such as the gateway, reach the API server, so other pods in the cluster cannot go around the auth proxy.</p>
       </article>
       <article class="item">
         <h2><a href="https://github.com/kubernetes-sigs/lws/pull/1330" target="_blank" rel="noopener">LeaderWorkerSet</a></h2>
